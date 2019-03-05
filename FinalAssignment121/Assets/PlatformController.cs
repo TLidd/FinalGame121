@@ -7,6 +7,7 @@ public class PlatformController : MonoBehaviour
     Vector3 Midpos = new Vector3(0,0,0);
     Vector3 Rightpos = new Vector3(4,0,0);
     Vector3 Leftpos = new Vector3(-4,0,0);
+    float time = 0f;
 
     Vector3 incPlatforms = new Vector3(0,0,5f);
 
@@ -34,5 +35,10 @@ public class PlatformController : MonoBehaviour
         obj.GetComponent<Renderer>().material = mat;
         Platform platform = obj.GetComponent<Platform>();
         platform.setPlatform(position, scale);
+    }
+
+    void Update()
+    {
+        time += Time.deltaTime;
     }
 }

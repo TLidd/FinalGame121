@@ -8,7 +8,7 @@ public GameObject brick;
 
     void Start() 
     {
-        Instantiate(brick, new Vector3(0, 0, 15), Quaternion.identity);
+        //Instantiate(brick, new Vector3(0, 0, 15), Quaternion.identity);
 
     }
 
