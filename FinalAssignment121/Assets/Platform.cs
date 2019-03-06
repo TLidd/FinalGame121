@@ -5,7 +5,12 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     //public System.Random ran = new System.Random();
-    //public GameObject brick;
+    BoxController BoxControl;
+    private void Start()
+    {
+        BoxControl = GameObject.Find("GameController").GetComponent<BoxController>();
+    }
+
     public void setPlatform(Vector3 pos, Vector3 scale)
     {
         Rigidbody objectbody = this.gameObject.AddComponent<Rigidbody>();
@@ -24,15 +29,18 @@ public class Platform : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         if(other.transform.gameObject.name == "Backboard")
         {
+            System.Random ran = new System.Random();
             //take care of the spawning objects here can use graph by iterating through and see which vertecies are empty
             //and then spawn according to the empty vertecies.
             Graph G = new Graph();
             G.addEdges();
-            for(int i = 0; i < 5; i++)
+            int i = 5;
+            while(i != 0)
             {
-                System.Random ran = new System.Random();
-                //Debug.Log("here");
-                G.removeEdges(ran.Next(36));
+                int ranBox = ran.Next(36);
+                G.removeEdges(ranBox);
+                if(ranBox % 2 == 0) G.removeEdges(ranBox+1);   
+                --i;
             }
             //run bfs before this
             SpawnThings(G);
@@ -48,20 +56,12 @@ public class Platform : MonoBehaviour
             {
                 int zpos = i / 6;
                 int xpos;
-                if(i % 6 == 2 || i % 6 == 3)
-                {
-                    xpos = 0;
-                }
-                else if(i % 6 == 0 || i % 6 == 1)
-                {
-                    xpos = -1;
-                }
-                else{
-                    xpos = 1;
-                }
-                //Instantiate(brick, new Vector3(0, xpos, 48 + zpos), Quaternion.identity);
-                GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                obj.gameObject.transform.position = new Vector3(xpos, 1, 36 + zpos);
+                int ypos = 1;
+                if(i % 6 == 2 || i % 6 == 3) xpos = 0;
+                else if(i % 6 == 0 || i % 6 == 1) xpos = -1;
+                else xpos = 1;
+                if(i % 2 != 1) ypos = 2;
+                BoxControl.createBox(xpos, ypos, 40 + zpos);
             }
         }
     }

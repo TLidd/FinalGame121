@@ -53,11 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BoxController.cs" />
+     <Compile Include="Assets\Boxes.cs" />
      <Compile Include="Assets\Graph.cs" />
      <Compile Include="Assets\Platform.cs" />
      <Compile Include="Assets\PlatformController.cs" />
      <Compile Include="Assets\Player.cs" />
-     <Compile Include="Assets\test.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>E:/SchoolCodeSpace/FinalGame121/FinalAssignment121/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>

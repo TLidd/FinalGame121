@@ -66,6 +66,7 @@ public class Graph
             }
         }
         gridspots[vertex].Clear();
+        Debug.Log(gridspots[vertex].Count);
         if(vertex % 6 == 4)
         {
             gridspots[vertex - 2].Remove(vertex+6);

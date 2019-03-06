@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     Vector3 Midpos = new Vector3(0,0,0);
-    Vector3 Rightpos = new Vector3(4,0,0);
-    Vector3 Leftpos = new Vector3(-4,0,0);
-    float time = 0f;
+    //Vector3 Rightpos = new Vector3(4,0,0);
+    //Vector3 Leftpos = new Vector3(-4,0,0);
+    //float time = 0f;
 
     Vector3 incPlatforms = new Vector3(0,0,5f);
 
@@ -20,11 +20,11 @@ public class PlatformController : MonoBehaviour
         for(int i = 0; i < 10; ++i)
         {
             addPlatform(Midpos, scale);
-            addPlatform(Leftpos, scale);
-            addPlatform(Rightpos, scale);
+            //addPlatform(Leftpos, scale);
+            //addPlatform(Rightpos, scale);
             Midpos += incPlatforms;
-            Rightpos += incPlatforms;
-            Leftpos += incPlatforms;
+            //Rightpos += incPlatforms;
+            //Leftpos += incPlatforms;
         }
     }
 
@@ -39,6 +39,6 @@ public class PlatformController : MonoBehaviour
 
     void Update()
     {
-        time += Time.deltaTime;
+        //time += Time.deltaTime;
     }
 }

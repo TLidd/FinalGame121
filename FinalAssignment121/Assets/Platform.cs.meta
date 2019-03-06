@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - belt: {fileID: 2100000, guid: a94ebc7ad8dd24544a770f46f1a27e06, type: 2}
+  - brick: {fileID: 100000, guid: e8ffcb9c31ba4f04fa5e284aad39d64a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

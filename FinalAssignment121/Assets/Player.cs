@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    Rigidbody body;
+    private void Start()
+    {
+        body = GetComponent<Rigidbody>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -24,9 +28,5 @@ public class Player : MonoBehaviour
         {
             transform.Translate(new Vector3(0f,0f,-2f) * Time.deltaTime);
         }
-        // if(!Input.GetKey(KeyCode.A) && !Input.GetKeyDown(KeyCode.D))
-        // {
-        //     transform.Translate(new Vector3(0f,0f,1f) * Time.deltaTime);
-        // }    
     }
 }
