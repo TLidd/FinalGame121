@@ -17,7 +17,7 @@ public class PlatformController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < 10; ++i)
+        for(int i = 0; i < 17; ++i)
         {
             addPlatform(Midpos, scale);
             //addPlatform(Leftpos, scale);

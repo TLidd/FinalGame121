@@ -63,7 +63,7 @@ public class Platform : MonoBehaviour
             }
             //Debug.Log(count);
             SpawnThings(G);
-            this.gameObject.transform.position += new Vector3(0,0,50);
+            this.gameObject.transform.position += new Vector3(0,0,85);
         }
     }
 
@@ -77,24 +77,10 @@ public class Platform : MonoBehaviour
                 {
                     if(G.grid[i,j,k].item == true)
                     {
-                        BoxControl.createBox(i - 3, j + 1, 40 + k);
+                        BoxControl.createBox(i - 3, j + 1, 75 + k);
                     }
                 }
             }
         }
-        // for(int i = 0; i < 36; ++i)
-        // {
-        //     if(G.gridspots[i].Count == 0)
-        //     {
-        //         int zpos = i / 6;
-        //         int xpos;
-        //         int ypos = 1;
-        //         if(i % 6 == 2 || i % 6 == 3) xpos = 0;
-        //         else if(i % 6 == 0 || i % 6 == 1) xpos = -1;
-        //         else xpos = 1;
-        //         if(i % 2 != 1) ypos = 2;
-        //         BoxControl.createBox(xpos, ypos, 40 + zpos);
-        //     }
-        // }
     }
 }
