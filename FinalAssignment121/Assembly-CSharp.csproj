@@ -57,13 +57,13 @@
      <Compile Include="Assets\scripts\Boxes.cs" />
      <Compile Include="Assets\scripts\ButtonController.cs" />
      <Compile Include="Assets\scripts\Controls.cs" />
+     <Compile Include="Assets\scripts\EndCanvas.cs" />
      <Compile Include="Assets\scripts\Graph.cs" />
      <Compile Include="Assets\scripts\MainMenu.cs" />
      <Compile Include="Assets\scripts\Platform.cs" />
      <Compile Include="Assets\scripts\PlatformController.cs" />
+     <Compile Include="Assets\scripts\PlayCanvas.cs" />
      <Compile Include="Assets\scripts\Player.cs" />
-     <None Include="Assets\SpaceZeta_Spotlight\Info.txt" />
-     <None Include="Assets\Jeremy\Docs\MaleCharacterAnimation.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>E:/SchoolCodeSpace/FinalGame121/FinalAssignment121/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>

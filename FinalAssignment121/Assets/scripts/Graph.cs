@@ -112,7 +112,6 @@ public class Graph
     public void removeEdges(Vector3 vertex)
     {
         //removes the edges attached to the box that will spawn in
-        //grid[(int)vertex.x, (int)vertex.y, (int)vertex.z].adj.Clear();
         grid[(int)vertex.x, (int)vertex.y, (int)vertex.z].item = true;
         
         if(vertex.x != 0)
@@ -178,7 +177,6 @@ public class Graph
         while(queue.Count != 0)
         {
             Vector3 vertex = queue.Dequeue();
-            //Debug.Log(vertex);
             for(int i = 0; i < grid[(int)vertex.x, (int)vertex.y, (int)vertex.z].adj.Count; ++i)
             {
                 //if it can reach the end vertecies return true

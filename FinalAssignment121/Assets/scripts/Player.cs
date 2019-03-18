@@ -5,54 +5,91 @@ using System;
 
 public class Player : MonoBehaviour
 {
+    float time = 1.0f;
+    bool setTime = false;
+    bool rotated = false;
+    private Animation anim;
+    public GameObject character;
     Rigidbody body;
+    public static bool PlayerAlive = true;
     bool planted = true;
-    public float jumpForce = 2.0f;
+    private float jumpForce = 4f;
     public Vector3 jump;
     private void Start()
     {
+        anim = GetComponent<Animation>();
         body = GetComponent<Rigidbody>();
         jump = new Vector3(0.0f, 1.5f, 0.0f);
+        anim.Play("Run");
     }
     // Update is called once per frame
     void FixedUpdate()
     {
         if(Input.GetKey(KeyCode.A))
         {
-            transform.Translate(new Vector3(-2f,0,0f) * Time.deltaTime);
+            if(!rotated)
+            {
+                transform.Translate(new Vector3(-2f,0,0f) * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(new Vector3(2f,0,0f) * Time.deltaTime);
+            }
         }
         if(Input.GetKey(KeyCode.D))
         {
-            transform.Translate(new Vector3(2f,0,0f) * Time.deltaTime);
-        }
-        if(Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(new Vector3(0f,0,2f) * Time.deltaTime);
+            if(!rotated)
+            {
+                transform.Translate(new Vector3(2f,0,0f) * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(new Vector3(-2f,0,0f) * Time.deltaTime);
+            }
         }
         if(Input.GetKey(KeyCode.S))
         {
-            transform.Translate(new Vector3(0f,0,-2.5f) * Time.deltaTime);
+            if(!rotated)
+            {
+                transform.Rotate(0,180,0);
+                rotated = true;
+            }
+            transform.Translate(new Vector3(0f,0,4.5f) * Time.deltaTime);
         }
-        if(Input.GetKey(KeyCode.Space) && planted)
+        else if(transform.position.z < 7f)
         {
+            if(rotated)
+            {
+                transform.Rotate(0,180,0);
+                rotated = false;
+            }
+            transform.Translate(new Vector3(0f,0,1f) * Time.deltaTime);
+        }
+        if(Input.GetKey(KeyCode.Space) && time >= 1.0 && planted)
+        {
+            anim.Play("Runtojumpspring");
+            setTime = true;
+            time = 0;
             body.AddForce(jump * jumpForce, ForceMode.Impulse);
             planted = false;
+        }
+        if(setTime)
+        {
+            time += Time.deltaTime;
+            if(time >= 1.0 && planted)
+            {
+                setTime = false;
+                anim.Play("Run");
+            }
         }
     }
 
     private void OnCollisionStay(Collision other)
     {
-        if(other.transform.gameObject.name == "box")
+        if(other.transform.gameObject.name == "Backboard")
         {
-            Vector3 check = other.transform.position - transform.position;
-            if(Math.Abs(check.x) <= 1 && Math.Abs(check.y) >=1 && Math.Abs(check.z) <= 1)
-            {
-                planted = true;
-            }
+            PlayerAlive = false;
         }
-        else if(other.transform.gameObject.name == "platform")
-        {
-            planted = true;
-        }
+        planted = true;
     }
 }

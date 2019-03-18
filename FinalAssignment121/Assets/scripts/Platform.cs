@@ -5,11 +5,19 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     public static Vector3 SolvePoint = new Vector3(0, 0, 0);
-    //public System.Random ran = new System.Random();
+    public static int spawnAmount = 8;
+    public static System.Random ran;
     BoxController BoxControl;
+    
     private void Start()
     {
         BoxControl = GameObject.Find("GameController").GetComponent<BoxController>();
+        if(transform.position.z > 20)
+        {
+            ran = new System.Random((int)transform.position.z);
+            Graph G = MakeObjects(ran);
+            SpawnThings(G);
+        }
     }
 
     public void setPlatform(Vector3 pos, Vector3 scale)
@@ -30,41 +38,42 @@ public class Platform : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         if(other.transform.gameObject.name == "Backboard")
         {
-            System.Random ran = new System.Random();
-            //take care of the spawning objects here can use graph by iterating through and see which vertecies are empty
-            //and then spawn according to the empty vertecies.
-            Graph G = new Graph(7, 3, 5);
-            G.addEdges();
-            int i = 25;
-            //int count = 0;
-            //use timer to remove x amount of boxes and run bfs each time until not solvable or amount is reached
-            while(i != 0)
-            {
-                Vector3 randomBox = new Vector3(ran.Next(G.width), ran.Next(G.height), ran.Next(1, G.length));
-                G.removeEdges(randomBox);
-                //count++;
-                if(randomBox.y > 0)
-                {
-                    int y = (int)randomBox.y;
-                    for(int j = (int)randomBox.y; j >= 0; --j)
-                    {
-                        G.removeEdges(new Vector3(randomBox.x, j, randomBox.z));
-                    }
-                }   
-                --i;
-                if(!G.BFS(SolvePoint))
-                {
-                    for(int j = 0; j <= (int)randomBox.y; ++j)
-                    {
-                        G.replaceEdge(new Vector3(randomBox.x, j, randomBox.z));
-                    }
-                    break;
-                }
-            }
-            //Debug.Log(count);
-            SpawnThings(G);
+            ran = new System.Random();
+            Graph G = MakeObjects(ran);
             this.gameObject.transform.position += new Vector3(0,0,85);
+            SpawnThings(G);
         }
+    }
+
+    public Graph MakeObjects(System.Random ran)
+    {
+        Graph G = new Graph(7, 3, 5);
+        G.addEdges();
+        int i = spawnAmount;
+        while(i != 0)
+        {
+            Vector3 randomBox = new Vector3(ran.Next(G.width), ran.Next(G.height), ran.Next(1, G.length));
+            G.removeEdges(randomBox);
+            if(randomBox.y > 0)
+            {
+                int y = (int)randomBox.y;
+                for(int j = (int)randomBox.y; j >= 0; --j)
+                {
+                    G.removeEdges(new Vector3(randomBox.x, j, randomBox.z));
+                }
+            }   
+            --i;
+            if(!G.BFS(SolvePoint))
+            {
+                for(int j = 0; j <= (int)randomBox.y; ++j)
+                {
+                    G.replaceEdge(new Vector3(randomBox.x, j, randomBox.z));
+                }
+                break;
+            }
+        }
+
+        return G;
     }
 
     public void SpawnThings(Graph G)
@@ -77,7 +86,7 @@ public class Platform : MonoBehaviour
                 {
                     if(G.grid[i,j,k].item == true)
                     {
-                        BoxControl.createBox(i - 3, j + 1, 75 + k);
+                        BoxControl.createBox(i - 3, j + 1, (int)transform.position.z + k);
                     }
                 }
             }

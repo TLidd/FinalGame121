@@ -16,13 +16,12 @@ public class MainMenu : MonoBehaviour
 
     private void ToGame()
     {
-        Debug.Log("To Game!");
+        Player.PlayerAlive = true;
         SceneManager.LoadScene("PlayScene");
     }
 
     private void ToControls()
     {
-        Debug.Log("ToControls");
         SceneManager.LoadScene("Controls");
     }
 }

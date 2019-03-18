@@ -5,12 +5,7 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     Vector3 Midpos = new Vector3(0,0,0);
-    //Vector3 Rightpos = new Vector3(4,0,0);
-    //Vector3 Leftpos = new Vector3(-4,0,0);
-    //float time = 0f;
-
     Vector3 incPlatforms = new Vector3(0,0,5f);
-
     Vector3 scale = new Vector3(7,1,5);
 
     public Material mat;
@@ -20,11 +15,7 @@ public class PlatformController : MonoBehaviour
         for(int i = 0; i < 17; ++i)
         {
             addPlatform(Midpos, scale);
-            //addPlatform(Leftpos, scale);
-            //addPlatform(Rightpos, scale);
             Midpos += incPlatforms;
-            //Rightpos += incPlatforms;
-            //Leftpos += incPlatforms;
         }
     }
 
@@ -36,10 +27,5 @@ public class PlatformController : MonoBehaviour
         obj.name = "platform";
         Platform platform = obj.GetComponent<Platform>();
         platform.setPlatform(position, scale);
-    }
-
-    void Update()
-    {
-        //time += Time.deltaTime;
     }
 }
